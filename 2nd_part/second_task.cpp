@@ -1,53 +1,52 @@
-/*
-С использованием файловых и строковых потоков написать программу,
-которая считывает текст из файла и выводит на экран предложения,
-содержащие максимальное количество знаков пунктуации.
-*/
-
 #include <iostream>
-#include <conio.h>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include "exceptions.h"
 
 using namespace std;
 
 void second_task() {
-    string line, text;
+    stringstream text, line;
     int counter = 0, max_counter = 0, begin_of_sentence = 0;
     ifstream input("text.txt");
-    if (!input)
-        throw FileOpenException("Error with opening text.txt!");
+    
+    if (!input) {
+        throw FileOpenException("Error with opening the file!");
+    }
 
-    while (getline(input, line)) {
-        text += line;
+    string line_from_file;
+    while (getline(input, line_from_file)) {
+        text << line_from_file << '\n'; 
     }
 
     input.close();
 
-    for (char &ch : text) {
+    for (char &ch : text.str()) {
         if (ch == '.' || ch == '!' || ch == '?') {
             if (counter > max_counter) {
                 max_counter = counter;
             }
             counter = 0;
-        }
-        else if (ch == ',' || ch == ':' || ch == '-' || ch == '"') 
+        } else if (ch == ',' || ch == ':' || ch == '-' || ch == '"') {
             counter++;
+        }
     }
 
     counter = 0;
 
-    for (int i = 0; i <= text.size(); i++) {
-        if (text[i] == '.' || text[i] == '!' || text[i] == '?') {
+    for (int i = 0; i <= text.str().size(); i++) {
+        if (text.str()[i] == '.' || text.str()[i] == '!' || text.str()[i] == '?') {
             if (counter == max_counter) {
-                line = text.substr(begin_of_sentence, i - begin_of_sentence + 1); 
-                cout << line << endl;
+                line.str("");
+                line.clear();
+                line << text.str().substr(begin_of_sentence, i - begin_of_sentence + 1);
+                cout << line.str() << endl;
             }
             counter = 0;
             begin_of_sentence = i + 1;
-        }
-        else if (text[i] == ',' || text[i] == ':' || text[i] == '-' || text[i] == '"') 
+        } else if (text.str()[i] == ',' || text.str()[i] == ':' || text.str()[i] == '-' || text.str()[i] == '"') {
             counter++;
+        }
     }
 }
