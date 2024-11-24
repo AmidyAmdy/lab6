@@ -13,15 +13,18 @@ private:
 public:
     List() : head(nullptr) {}
     void addOrder(const Order &order);
-    Order *findOrderByRasSchPlatl(const std::string &ras_sch_plat);
+    void findSumByRasSchPlatl(const std::string &ras_sch_plat);
     void printOrders() const;
+    Node* getHead() const { return head; }
+    void deleteOrder(int num);
+    void editOrder(int num);
 
     ~List()
     {
         while (head)
         {
             Node *temp = head;
-            head = head->next;
+            head = head->getNext();
             delete temp;
         }
     }

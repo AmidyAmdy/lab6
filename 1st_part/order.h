@@ -13,10 +13,29 @@ private:
     double sum;
 
 public:
-    explicit Order(const string &ras_sch_plat, const string &ras_sch_pol, double sum) : ras_sch_plat(ras_sch_plat), ras_sch_pol(ras_sch_pol), sum(sum) {}
-    Order(const Order &other) : ras_sch_plat(other.ras_sch_plat), ras_sch_pol(other.ras_sch_pol), sum(other.sum) {}
-    Order() : ras_sch_plat("Unknown"), ras_sch_pol("Unknown"), sum(0) {}
-    ~Order() {}
+    explicit Order(const string &ras_sch_plat, const string &ras_sch_pol, double sum)
+        : ras_sch_plat(ras_sch_plat), ras_sch_pol(ras_sch_pol), sum(sum) 
+    {
+        std::cout << "Order constructor called with parameters: "
+                  << "payer's account = " << ras_sch_plat << ", "
+                  << "beneficiary's account = " << ras_sch_pol << ", "
+                  << "amount = " << sum << std::endl;
+    }
+
+    Order(const Order &other) : ras_sch_plat(other.ras_sch_plat), ras_sch_pol(other.ras_sch_pol), sum(other.sum)
+    {
+        std::cout << "Order copy constructor called for Order: " << other << std::endl;
+    }
+
+    Order() : ras_sch_plat("Unknown"), ras_sch_pol("Unknown"), sum(0)
+    {
+        std::cout << "Order default constructor called" << std::endl;
+    }
+
+    ~Order() 
+    {
+        std::cout << "Order destructor called for Order: " << *this << std::endl;
+    }
 
     string getRas_sch_plat() const { return ras_sch_plat; }
     void setRas_sch_plat(string newRas_sch_plat) { ras_sch_plat = newRas_sch_plat; }

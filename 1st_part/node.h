@@ -7,8 +7,13 @@ class Node
 private:
     Order order;
     Node *next;
-
-    Node(const Order &order) : order(order), next(nullptr) {}
+public:
+    Node(const Order &order) : order(order), next(nullptr) {
+        std::cout << "Node constructor called for Order: " << order << std::endl;
+    }
+    Order& getOrder() { return order; }
+    Node* getNext() const { return next; }
+    void setNext(Node* nextNode) { next = nextNode; }
 };
 
 #endif

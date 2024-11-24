@@ -5,19 +5,19 @@ using namespace std;
 
 std::ostream &operator<<(std::ostream &out, const Order &order)
 {
-    out << "Плательщик: " << order.getRas_sch_plat() << ", "
-        << "Получатель: " << order.getRas_sch_pol() << ", "
-        << "Сумма: " << order.getSum();
+    out << "Payer: " << order.getRas_sch_plat() << ", "
+        << "Beneficiary: " << order.getRas_sch_pol() << ", "
+        << "Amount: " << order.getSum();
     return out;
 }
 
 std::istream &operator>>(std::istream &in, Order &order)
 {
-    std::cout << "Введите расчетный счет плательщика: ";
+    std::cout << "Enter the payer's current account: ";
     in >> order.ras_sch_plat;
-    std::cout << "Введите расчетный счет получателя: ";
+    std::cout << "Enter the beneficiary's current account: ";
     in >> order.ras_sch_pol;
-    std::cout << "Введите сумму: ";
+    std::cout << "Enter the amount in rubles: ";
     in >> order.sum;
     return in;
 }

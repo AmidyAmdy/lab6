@@ -9,7 +9,7 @@ using namespace std;
 void second_task() {
     stringstream text, line;
     int counter = 0, max_counter = 0, begin_of_sentence = 0;
-    ifstream input("text.txt");
+    ifstream input("2nd_part/text.txt");
     
     if (!input) {
         throw FileOpenException("Error with opening the file!");
